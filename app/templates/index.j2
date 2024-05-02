@@ -1,0 +1,9 @@
+{% extends "base.j2" %}
+{% block content %}
+<div class="box has-text-centered is-size-1">
+    {% if iseaster %} &#128522; {% else %} &#128542; {% endif %}
+</div>
+<div class="box has-text-centered has-text-weight-light">
+    {{ easter_is_on }}
+</div>
+{% endblock %}

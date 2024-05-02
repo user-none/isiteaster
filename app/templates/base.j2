@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+    {% include "partials/head.j2" %}
+
+    <body class="has-background-info-light">
+        <div class="hero is-fullheight">
+            <main class="container pt-6 pb-6"> 
+                <div class="columns is-centered">
+                    <div class="column is-half">
+                        {% block content required %}{% endblock %}
+                    </div>
+                </div>
+            </main>      
+            {% include "partials/footer.j2" %}
+        </div>
+    </body>
+</html>
