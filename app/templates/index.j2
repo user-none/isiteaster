@@ -1,7 +1,17 @@
 {% extends "base.j2" %}
 {% block content %}
 <div class="box has-text-centered is-size-1">
-    {% if iseaster %} &#128522; {% else %} &#128542; {% endif %}
+    {% if bunny_picture %}
+        <figure class="image is-square">
+            <img
+                src="{% if iseaster %}{{ url_for('static', filename='images/bunny_happy.svg') }}{% else %}{{ url_for('static', filename='images/bunny_sad.svg') }}{% endif %}"
+                width=400
+                height=400
+            />
+        </figure>
+    {% else %}
+        {% if iseaster %} &#128522; {% else %} &#128542; {% endif %}
+    {% endif %}
 </div>
 <div class="box has-text-centered has-text-weight-light">
     {{ easter_is_on }}

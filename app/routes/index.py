@@ -37,4 +37,4 @@ def index():
             easter = easter_date(today.year + 1)
         easter_is_on = 'Easter is on {0:%B} {day}, {year}'.format(easter, day=easter.day, year=easter.year)
 
-    return render_template('index.j2', iseaster=iseaster, easter_is_on=easter_is_on)
+    return render_template('index.j2', iseaster=iseaster, easter_is_on=easter_is_on, bunny_picture=current_app.config.get('BUNNY_PICTURE', False))
