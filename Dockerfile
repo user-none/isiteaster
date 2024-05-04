@@ -9,6 +9,7 @@ RUN python3 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
 RUN pip3 install --no-cache-dir -r requirements.txt
+RUN pip3 install --no-cache-dir gunicorn
 RUN pip3 uninstall -y pip setuptools packaging
 
 FROM alpine:latest AS release
