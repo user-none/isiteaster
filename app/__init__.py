@@ -24,12 +24,19 @@ def _load_config(app):
     app.config.from_object('config')
     app.config.from_pyfile('config.py', silent=True)
 
-def _check_bunny_pictures(app):
+def _check_images(app):
+    # Bunny Pictures
     path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', 'images')
     if os.path.exists(os.path.join(path, 'bunny_happy.svg')) and os.path.exists(os.path.join(path, 'bunny_sad.svg')):
         app.config['BUNNY_PICTURE'] = True
     else:
         app.config['BUNNY_PICTURE'] = False
+
+    # Favicon
+    if os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', 'favicon.ico')):
+        app.config['FAVICON'] = 'favicon.ico'
+    else:
+        app.config['FAVICON'] = 'favicon.blank.ico'
 
 def _register_blueprints(app):
     from .routes import index
@@ -48,7 +55,7 @@ def create_app():
 
     _register_error_handlers(app)
     _load_config(app)
-    _check_bunny_pictures(app)
+    _check_images(app)
     _register_blueprints(app)
 
     cache.init_app(app, config=app.config.get('CACHE_CONFIG'))

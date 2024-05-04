@@ -15,10 +15,11 @@
 
 import os
 
-from flask import Blueprint, send_from_directory, url_for
+from flask import Blueprint, send_from_directory, url_for, current_app
 
 bp = Blueprint('favicon', __name__)
 
 @bp.route('/favicon.ico')
 def favicon():
-    return send_from_directory('static', 'favicon.ico', mimetype='image/vnd.microsoft.icon')
+    print(current_app.config['FAVICON'])
+    return send_from_directory('static', current_app.config['FAVICON'], mimetype='image/vnd.microsoft.icon')
