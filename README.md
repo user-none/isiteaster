@@ -3,7 +3,7 @@
 Web App to tell you if it's Easter.
 
 
-## When Is Easter
+## When Is Easter?
 
 Easter day moves each year and is based on the full moon. The exact day
 of Easter for a given year can be determined using a multi-step
@@ -14,9 +14,9 @@ of Easter for a given year can be determined using a multi-step
 The application written in Python using Flask. It is a traditional web
 app where the back end drives a templated front end.
 
-If it's not Easter, the application will show a sad face and state
-the date of the next Easter day. If it is Easter, the app will show
-a happy face and state that it is Easter.
+If it's not Easter, the application will show a sad face and states
+the day Easter will next fall on. If it's Easter, the app will show
+a happy face and state that it's Easter.
 
 ## 3rd Party Services
 
@@ -82,7 +82,7 @@ Unlike the Flask local testing server, `gunicorn` requires you to specify that
 `create_app` is a function which it needs to run to get the app object.
 
 ```
-gunicorn --bind 0.0.0.0:7999 'app:create_app()
+gunicorn --bind 0.0.0.0:7999 'app:create_app()'
 ```
 
 ## Docker
