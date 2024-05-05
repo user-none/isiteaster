@@ -164,3 +164,8 @@ cython_debug/
 
 # vim
 *.swp
+
+# Images that don't get distributed
+static/favicon.ico
+static/images/bunny_happy.svg
+static/images/bunny_sad.svg
