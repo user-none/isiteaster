@@ -14,6 +14,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import json
+import urllib
 
 from datetime import datetime, timezone
 from ipaddress import ip_address
@@ -32,7 +33,13 @@ def _get_ip_tz_delta(ip):
 
     try:
         j = None
-        url = 'https://api.ipgeolocation.io/timezone?ip={ip}&apiKey={key}'.format(ip=ip, key=config.get('IPGEO_API_KEY'))
+        params = urllib.parse.urlencode(
+            {
+                'ip': ip,
+                'apiKey': config.get('IPGEO_API_KEY')
+            }
+        )
+        url = 'https://api.ipgeolocation.io/timezone?%s' % params
         with urllib.request.urlopen(url, timeout=2) as f:
             j = json.loads(f.read().decode('utf-8'))
 
