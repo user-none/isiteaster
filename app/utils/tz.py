@@ -13,10 +13,9 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import json
-import urllib
+import requests
 
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from ipaddress import ip_address
 
 from .. import cache
@@ -28,25 +27,27 @@ def _ip_tz_offset_cache_key(ip):
 def _is_private_ip(ip):
     return ip_address(ip).is_private
 
-def _get_ip_tz_delta(ip):
+def _get_ip_tz_delta(ip, apikey):
     delta = None
+
+    if not ip or not apikey:
+        return delta
 
     try:
         j = None
-        params = urllib.parse.urlencode(
-            {
-                'ip': ip,
-                'apiKey': config.get('IPGEO_API_KEY')
-            }
-        )
-        url = 'https://api.ipgeolocation.io/timezone?%s' % params
-        with urllib.request.urlopen(url, timeout=2) as f:
-            j = json.loads(f.read().decode('utf-8'))
+        params = { 'ip': ip, 'apiKey': apikey }
+        r = requests.get('https://api.ipgeolocation.io/timezone', params=params)
+        j = r.json()
 
         if not j:
             raise Exception('Empty JSON')
 
-        offset = j.get('timezone_offset', None)
+        is_dst = j.get('is_dst')
+        if is_dst:
+            offset = j.get('timezone_offset_with_dst', None)
+        else:
+            offset = j.get('timezone_offset', None)
+
         if offset == None:
             raise Exception('Missing timezone offset')
 
@@ -82,13 +83,13 @@ def get_tz(request, config):
         return timezone(delta)
 
     # Get timezone offset from geo IP service
-    delta = _get_ip_tz_delta(ip)
+    delta = _get_ip_tz_delta(ip, config.get('IPGEO_API_KEY'))
 
     # Use system timezone if we can't get the IP's for some reason
     if not delta:
         delta = datetime.now(timezone.utc).astimezone().utcoffset()
 
     # Cache offset
-    cache.set(_ip_tz_offset_cache_key(ip), delta.utcoffset().total_seconds())
+    cache.set(_ip_tz_offset_cache_key(ip), delta.total_seconds())
 
     return timezone(delta)
