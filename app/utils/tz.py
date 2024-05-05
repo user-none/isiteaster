@@ -18,9 +18,8 @@ import json
 from datetime import datetime, timezone
 from ipaddress import ip_address
 
-from crawlerdetect import CrawlerDetect
-
 from .. import cache
+from .crawler_detect import is_crawler
 
 def _ip_tz_offset_cache_key(ip):
     return '{ip}_tz_offset'.format(ip=ip)
@@ -66,8 +65,7 @@ def get_tz(request, config):
 
     # Don't try to waste lookups on crawlers
     user_agent = request.headers.get('User-Agent')
-    crawler_detect = CrawlerDetect(user_agent=user_agent)
-    if not user_agent or crawler_detect.isCrawler():
+    if not user_agent or is_crawler(user_agent):
         return None
 
     # Try pulling the tz offset for the ip from the cache
