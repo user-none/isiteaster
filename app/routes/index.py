@@ -17,24 +17,16 @@ from datetime import datetime
 
 from flask import Blueprint, render_template, request, current_app
 
-from ..utils.easter import easter_date
-from ..utils.tz import get_tz
+from ..utils.easter import easter_date, when_is_easter
 
 bp = Blueprint('index', __name__)
 
 @bp.route('/')
 def index():
-    tz = get_tz(request, current_app.config)
-    today = datetime.now(tz).date()
-    easter = easter_date(today.year)
-
-    if easter == today:
-        iseaster = True
+    iseaster, easter = when_is_easter(request, current_app.config)
+    if iseaster:
         easter_is_on = 'Today is Easter!'
     else:
-        iseaster = False
-        if easter < today:
-            easter = easter_date(today.year + 1)
         easter_is_on = 'Easter is on {0:%B} {day}, {year}'.format(easter, day=easter.day, year=easter.year)
 
     return render_template('index.j2', iseaster=iseaster, easter_is_on=easter_is_on, bunny_picture=current_app.config.get('BUNNY_PICTURE', False))

@@ -13,7 +13,9 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from datetime import date
+from datetime import datetime, date
+
+from .tz import get_tz
 
 def easter_date(year: int) -> date:
     a = year % 19
@@ -31,3 +33,23 @@ def easter_date(year: int) -> date:
     p = (h + l - (7 * m) + (33 * n) + 19) % 32 # day
 
     return date(year, n, p)
+
+def when_is_easter(request, config) -> (bool, date):
+    today = datetime.now().date()
+    today_m2 = date(today.year, today.month, today.day - 2)
+    today_p2 = date(today.year, today.month, today.day + 2)
+    easter = easter_date(today.year)
+
+    # Within 2 days we need to do some lookups to take into account timezone
+    # of the visitor
+    if easter > today_m2 and easter < today_p2:
+        tz = get_tz(request, config)
+        today = datetime.now(tz).date()
+
+    if easter == today:
+        return True, None
+    elif easter < today:
+        # Easter already happened, we need to look to next year
+        easter = easter_date(today.year + 1)
+
+    return False, easter
