@@ -1,0 +1,9 @@
+**/__pycache__
+**/*.mo
+**/*.
+**/.DS_Store
+app/babel.cfg
+app/messages.pot
+app/static/favicon.ico
+app/static/images/bunny_happy.svg
+app/static/images/bunny_sad.svg
