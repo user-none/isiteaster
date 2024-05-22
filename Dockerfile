@@ -30,7 +30,5 @@ COPY --from=build /app/translations isiteaster/translations
 COPY --from=build /opt/venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
-VOLUME /data
-
 CMD ["gunicorn", "--bind", "0.0.0.0:80", "isiteaster:create_app()" ]
 
