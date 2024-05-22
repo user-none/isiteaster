@@ -1,0 +1,56 @@
+# Dutch translations for PROJECT.
+# Copyright (C) 2024 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2024-05-20 20:31-0400\n"
+"PO-Revision-Date: 2024-05-20 20:23-0400\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: nl\n"
+"Language-Team: nl <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.15.0\n"
+
+#: templates/404.j2:7
+msgid "The bunny has escaped!"
+msgstr "Het konijn is ontsnapt!"
+
+#: templates/404.j2:11
+msgid "Chase after it"
+msgstr "Achtervolgen"
+
+#: templates/500.j2:7
+msgid "The bunny is confused"
+msgstr "Het konijn is verward"
+
+#: templates/500.j2:11
+msgid "Try again?"
+msgstr "Opnieuw proberen?"
+
+#: templates/index.j2:17
+msgid "Today is Easter!"
+msgstr "Vandaag is het Pasen"
+
+#: templates/index.j2:34
+msgid "Easter is on"
+msgstr "Pasen is op"
+
+#: templates/index.j2:37
+msgid "(It's a Sunday because Easter is always on a Sunday)"
+msgstr "(Het is een zondaag omdat Pasen altijd op een zondaag valt)"
+
+#: templates/partials/footer.j2:6
+msgid "View on GitHub"
+msgstr "Bekijken op GitHub"
+
+#: templates/partials/head.j2:4
+msgid "Is It Easter?"
+msgstr "Is het Pasen?"
+

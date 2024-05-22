@@ -17,7 +17,11 @@ import os
 
 from flask import Flask, Blueprint
 from flask_caching import Cache
+from flask_babel import Babel
 
+from .utils.locale import get_locale
+
+babel = Babel()
 cache = Cache()
 
 def _load_config(app):
@@ -58,6 +62,7 @@ def create_app():
     _check_images(app)
     _register_blueprints(app)
 
+    babel.init_app(app, locale_selector=get_locale)
     cache.init_app(app, config=app.config.get('CACHE_CONFIG'))
 
     return app

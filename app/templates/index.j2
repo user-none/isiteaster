@@ -14,7 +14,7 @@
         {% endif %}
     </div>
     <div class="has-text-centered has-text-weight-bold">
-        {{ easter_is_on }}
+        {{ _('Today is Easter!') }}
     </div>
 {% else %}
     <div class="box has-text-centered">
@@ -31,10 +31,10 @@
     </div>
     <div class="box has-text-centered">
         <div class="has-text-weight-bold">
-            {{ easter_is_on }}
+            {{ _('Easter is on') }} {{ easter_date|dateformat(format='long', rebase=False) }}
         </div>
         <div class="has-text-weight-light is-size-7">
-            (It's a Sunday because Easter is always on a Sunday)
+            {{ _("(It's a Sunday because Easter is always on a Sunday)") }}
         </div>
     </div>
 {% endif %}

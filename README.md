@@ -90,3 +90,33 @@ gunicorn --bind 0.0.0.0:7999 'app:create_app()'
 ```
 docker build . -t isiteaster
 ```
+
+# Translations
+
+The application supports translations using Flask-Babel. Currently
+English and Dutch are supported. There are no plans to support additional
+languages at this time. Most likely any requests for additional languages
+will be declined due to needing someone who is fluent to comment to keeping
+the translations up to date in the future.
+
+## Adding additional languages
+
+1. Add the language code for the desired language to the list of supported languages in `app/utils/locale.py`.
+2. Initialize the new language for adding translations with `pybabel init -i messages.pot -d translations -l <LANG_CODE>`.
+3. Edit `translations/<LANG_CODE>/LC_MESSAGES/messages.po` and add the translations.
+4. Compile the translations using `pybabel compile -d translations`
+
+Where `<LANG_CODE>` is the language code. For example, `de`, or `es`.
+
+## Adding new strings
+
+All translatable strings should be either in the `j2` template and need
+to be wrapped in `{{ _('') }}` or in a `py` file. When in a `py` file
+`from flask_babel import gettext` and `gettext('')`.
+
+## Updating translations after new strings are added
+
+1. Generate new `messages.pot` file with the extracted strings using `pybabel extract -F babel.cfg -o messages.pot .`.
+2. Merge the new strings into the translation `po` files using `pybabel update -i messages.pot -d translations`.
+3. Edit all `po` files for each language located in `translations/<LANG_CODE>/LC_MESSAGES/messages.po`.
+4. Compile the translations using `pybabel compile -d translations`.
