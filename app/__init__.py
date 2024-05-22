@@ -37,8 +37,8 @@ def _check_images(app):
         app.config['BUNNY_PICTURE'] = False
 
     # Favicon
-    if os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', 'favicon.ico')):
-        app.config['FAVICON'] = 'favicon.ico'
+    if os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', 'images', 'favicon.ico')):
+        app.config['FAVICON'] = 'images/favicon.ico'
     else:
         app.config['FAVICON'] = 'favicon.blank.ico'
 

@@ -9,6 +9,7 @@ Easter day moves each year and is based on the full moon. The exact day
 of Easter for a given year can be determined using a multi-step
 [algorithm](https://en.wikipedia.org/wiki/Date_of_Easter).
 
+
 # App Design
 
 The application written in Python using Flask. It is a traditional web
@@ -46,6 +47,7 @@ This further reduces lookups to the IP Geolocation service. Flask-Cache
 supports a variety of back ends including caching servers such as Redis,
 Memcached, or local file.
 
+
 # Images
 
 Images are not required to be provided. However, none are included
@@ -55,7 +57,8 @@ are used. If a favicon.ico is not present, a blank favicon.ico will be used.
 
 - `static/images/bunny_happy.svg`: Picture of a happy bunny used when it is Easter
 - `static/images/bunny_sad.svg`: Picture of a sad bunny used when it is _not_ Easter
-- `static/favicon.ico`: Favicon.
+- `static/images/favicon.ico`: Favicon.
+
 
 # Setup and Run
 
@@ -90,6 +93,16 @@ gunicorn --bind 0.0.0.0:7999 'app:create_app()'
 ```
 docker build . -t isiteaster
 ```
+
+### Bind Mounts
+
+- Images: `/app/isiteaster/static/images/`
+  - `bunny_happy.svg`
+  - `bunny_sad.svg`
+  - `favicon.ico`
+- Config: `/app/isiteaster/instance/`
+  - `config.py`
+
 
 # Translations
 
