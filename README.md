@@ -115,9 +115,9 @@ the translations up to date in the future.
 ## Adding additional languages
 
 1. Add the language code for the desired language to the list of supported languages in `app/utils/locale.py`.
-2. Initialize the new language for adding translations with `pybabel init -i messages.pot -d translations -l <LANG_CODE>`.
-3. Edit `translations/<LANG_CODE>/LC_MESSAGES/messages.po` and add the translations.
-4. Compile the translations using `pybabel compile -d translations`
+2. Initialize the new language for adding translations with `pybabel init -i messages.pot -d app/translations -l <LANG_CODE>`.
+3. Edit `app/translations/<LANG_CODE>/LC_MESSAGES/messages.po` and add the translations.
+4. Compile the translations using `pybabel compile -d app/translations`
 
 Where `<LANG_CODE>` is the language code. For example, `de`, or `es`.
 
@@ -129,7 +129,7 @@ to be wrapped in `{{ _('') }}` or in a `py` file. When in a `py` file
 
 ## Updating translations after new strings are added
 
-1. Generate new `messages.pot` file with the extracted strings using `pybabel extract -F babel.cfg -o messages.pot .`.
-2. Merge the new strings into the translation `po` files using `pybabel update -i messages.pot -d translations`.
-3. Edit all `po` files for each language located in `translations/<LANG_CODE>/LC_MESSAGES/messages.po`.
-4. Compile the translations using `pybabel compile -d translations`.
+1. Generate new `messages.pot` file with the extracted strings using `pybabel extract -F babel.cfg -o messages.pot app`.
+2. Merge the new strings into the translation `po` files using `pybabel update -i messages.pot -d app/translations`.
+3. Edit all `po` files for each language located in `app/translations/<LANG_CODE>/LC_MESSAGES/messages.po`.
+4. Compile the translations using `pybabel compile -d app/translations`.
