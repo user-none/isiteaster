@@ -27,26 +27,35 @@ cache = Cache()
 def _load_config(app):
     app.config.from_object('config')
     app.config.from_pyfile('config.py', silent=True)
+    app.config.from_envvar('ISITEASTER_CONF', silent=True)
 
 def _check_images(app):
+    path = app.config.get('IMAGE_DIR')
+    if not path:
+        path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', 'images')
+        app.config['IMAGE_DIR'] = path
+
     # Bunny Pictures
-    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', 'images')
     if os.path.exists(os.path.join(path, 'bunny_happy.svg')) and os.path.exists(os.path.join(path, 'bunny_sad.svg')):
         app.config['BUNNY_PICTURE'] = True
     else:
         app.config['BUNNY_PICTURE'] = False
 
     # Favicon
-    if os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', 'images', 'favicon.ico')):
-        app.config['FAVICON'] = 'images/favicon.ico'
+    if os.path.exists(os.path.join(path, 'favicon.ico')):
+        app.config['FAVICON'] = 'favicon.ico'
+        app.config['FAVICON_DIR'] = path
     else:
         app.config['FAVICON'] = 'favicon.blank.ico'
+        app.config['FAVICON_DIR'] = 'static'
 
 def _register_blueprints(app):
     from .routes import index
     app.register_blueprint(index.bp)
     from .routes import favicon
     app.register_blueprint(favicon.bp)
+    from .routes import bunny_picture
+    app.register_blueprint(bunny_picture.bp)
 
 def _register_error_handlers(app):
     from .routes.error.e404 import page_not_found

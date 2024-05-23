@@ -53,11 +53,60 @@ Memcached, or local file.
 Images are not required to be provided. However, none are included
 but, if provided, will be used when detected. If images are not present, an
 alternative is used. Specially, if bunny pictures are not present, emoji
-are used. If a favicon.ico is not present, a blank favicon.ico will be used.
+are used. If a `favicon.ico` is not present, a blank `favicon.ico` will be used.
+
+Images in the following locations will be used.
 
 - `static/images/bunny_happy.svg`: Picture of a happy bunny used when it is Easter
 - `static/images/bunny_sad.svg`: Picture of a sad bunny used when it is _not_ Easter
 - `static/images/favicon.ico`: Favicon.
+
+Alternately, the setting `IMAGE_DIR` can be specified to set a location for
+the above images. This allows the images to be stored outside of the application.
+Images at this location should be the files and not within `static/images` sub directory.
+
+
+# Configuration
+
+There are three ways the application can be configured.
+
+1. Editing the `config.py`. However, this isn't recommended and should be left
+   as a default file.
+2. Use an instance configured file. Create `instance/config.py` and set the settings
+   within that file.
+3. Use a config file referenced by the environment variable `ISITEASTER_CONF`. The file
+   specified will be read and configuration settings applied.
+
+Configuration files are stacked with 1-3 being read and applied. Meaning, a later file's value
+will be used.
+
+## Settings
+
+### `REQUESTS_PROXIED`
+
+boolean
+
+Whether or not a reverse proxy is in use. When True will use the IP address
+from the `X-Forwarded-For` header set by the reverse proxy. Otherwise, the IP
+address of the client connection will be used.
+
+### `IPGEO_API_KEY`
+
+string
+
+API key for the IP geo location service. If not set the service will not be used.
+
+### `CACHE_CONFIG`
+
+dict
+
+Flask-Caching configuration.
+
+### `IMAGE_DIR`
+
+string
+
+Directory on disk where images are located.
 
 
 # Setup and Run
@@ -93,15 +142,6 @@ gunicorn --bind 0.0.0.0:7999 'app:create_app()'
 ```
 docker build . -t isiteaster
 ```
-
-### Bind Mounts
-
-- Images: `/app/isiteaster/static/images/`
-  - `bunny_happy.svg`
-  - `bunny_sad.svg`
-  - `favicon.ico`
-- Config: `/app/isiteaster/instance/`
-  - `config.py`
 
 
 # Translations

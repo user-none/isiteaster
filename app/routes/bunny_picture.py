@@ -15,10 +15,18 @@
 
 import os
 
-from flask import Blueprint, send_from_directory, url_for, current_app
+from flask import Blueprint, abort, send_from_directory, url_for, current_app
 
-bp = Blueprint('favicon', __name__)
+bp = Blueprint('bunny_picture', __name__)
 
-@bp.route('/favicon.ico')
-def favicon():
-    return send_from_directory(current_app.config.get('FAVICON_DIR'), current_app.config.get('FAVICON'), mimetype='image/vnd.microsoft.icon')
+@bp.route('/static/images/bunny_happy.svg')
+def bunny_happy():
+    if current_app.config.get('BUNNY_PICTURE'):
+        return send_from_directory(current_app.config.get('IMAGE_DIR'), 'bunny_happy.svg', mimetype='image/svg+xml')
+    abort(404)
+
+@bp.route('/static/images/bunny_sad.svg')
+def bunny_sad():
+    if current_app.config.get('BUNNY_PICTURE'):
+        return send_from_directory(current_app.config.get('IMAGE_DIR'), 'bunny_sad.svg', mimetype='image/svg+xml')
+    abort(404)
