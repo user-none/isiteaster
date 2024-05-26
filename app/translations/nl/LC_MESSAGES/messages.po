@@ -44,7 +44,7 @@ msgstr "Pasen valt op"
 
 #: templates/index.j2:37
 msgid "(It's a Sunday because Easter is always on a Sunday)"
-msgstr "(Het is een zondaag omdat Pasen altijd op een zondaag valt)"
+msgstr "(Het is een zondag omdat Pasen altijd op een zondag valt)"
 
 #: templates/partials/footer.j2:6
 msgid "View on GitHub"
