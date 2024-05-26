@@ -40,7 +40,7 @@ msgstr "Vandaag is het Pasen"
 
 #: templates/index.j2:34
 msgid "Easter is on"
-msgstr "Pasen is op"
+msgstr "Pasen valt op"
 
 #: templates/index.j2:37
 msgid "(It's a Sunday because Easter is always on a Sunday)"
