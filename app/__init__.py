@@ -25,7 +25,7 @@ babel = Babel()
 cache = Cache()
 
 def _load_config(app):
-    app.config.from_object('config')
+    app.config.from_pyfile(os.path.join(app.root_path, 'config_default.py'))
     app.config.from_pyfile('config.py', silent=True)
     app.config.from_envvar('ISITEASTER_CONF', silent=True)
 
