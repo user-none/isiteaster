@@ -32,7 +32,7 @@ def _load_config(app):
 def _check_images(app):
     path = app.config.get('IMAGE_DIR')
     if not path:
-        path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', 'images')
+        path = os.path.join(app.root_path, 'static', 'images')
         app.config['IMAGE_DIR'] = path
 
     # Bunny Pictures

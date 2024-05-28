@@ -164,6 +164,3 @@ cython_debug/
 
 # vim
 *.swp
-
-# Images that don't get distributed
-app/static/images
