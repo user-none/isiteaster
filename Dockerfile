@@ -23,7 +23,6 @@ WORKDIR /app
 
 RUN apk add --no-cache python3
 
-COPY ./config.py .
 COPY ./app ./isiteaster
 COPY --from=build /app/translations isiteaster/translations
 
