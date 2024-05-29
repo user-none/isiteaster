@@ -125,7 +125,7 @@ After setting up the venv, the Flask local testing server will be available.
 
 ```
 source .venv/bin/activate
-flask --debug -A app:create_app run
+flask --debug -A isiteaster:create_app run
 ```
 
 ## Running with gunicorn
@@ -134,7 +134,7 @@ Unlike the Flask local testing server, `gunicorn` requires you to specify that
 `create_app` is a function which it needs to run to get the app object.
 
 ```
-gunicorn --bind 0.0.0.0:7999 'app:create_app()'
+gunicorn --bind 0.0.0.0:7999 'isiteaster:create_app()'
 ```
 
 ## Docker
@@ -154,10 +154,10 @@ the translations up to date in the future.
 
 ## Adding additional languages
 
-1. Add the language code for the desired language to the list of supported languages in `app/utils/locale.py`.
-2. Initialize the new language for adding translations with `pybabel init -i messages.pot -d app/translations -l <LANG_CODE>`.
-3. Edit `app/translations/<LANG_CODE>/LC_MESSAGES/messages.po` and add the translations.
-4. Compile the translations using `pybabel compile -d app/translations`
+1. Add the language code for the desired language to the list of supported languages in `isiteaster/utils/locale.py`.
+2. Initialize the new language for adding translations with `pybabel init -i messages.pot -d isiteaster/translations -l <LANG_CODE>`.
+3. Edit `isiteaster/translations/<LANG_CODE>/LC_MESSAGES/messages.po` and add the translations.
+4. Compile the translations using `pybabel compile -d isiteaster/translations`
 
 Where `<LANG_CODE>` is the language code. For example, `de`, or `es`.
 
@@ -169,7 +169,7 @@ to be wrapped in `{{ _('') }}` or in a `py` file. When in a `py` file
 
 ## Updating translations after new strings are added
 
-1. Generate new `messages.pot` file with the extracted strings using `pybabel extract -F babel.cfg -o messages.pot app`.
-2. Merge the new strings into the translation `po` files using `pybabel update -i messages.pot -d app/translations`.
-3. Edit all `po` files for each language located in `app/translations/<LANG_CODE>/LC_MESSAGES/messages.po`.
-4. Compile the translations using `pybabel compile -d app/translations`.
+1. Generate new `messages.pot` file with the extracted strings using `pybabel extract -F babel.cfg -o messages.pot isiteaster`.
+2. Merge the new strings into the translation `po` files using `pybabel update -i messages.pot -d isiteaster/translations`.
+3. Edit all `po` files for each language located in `isiteaster/translations/<LANG_CODE>/LC_MESSAGES/messages.po`.
+4. Compile the translations using `pybabel compile -d isiteaster/translations`.
