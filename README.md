@@ -113,17 +113,17 @@ Directory on disk where images are located.
 
 ## Setting up the local environment
 
-```
+```zsh
 python -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
+pip install .
 ```
 
 ## Running locally for Debug
 
 After setting up the venv, the Flask local testing server will be available.
 
-```
+```zsh
 source .venv/bin/activate
 flask --debug -A isiteaster:create_app run
 ```
@@ -133,13 +133,13 @@ flask --debug -A isiteaster:create_app run
 Unlike the Flask local testing server, `gunicorn` requires you to specify that
 `create_app` is a function which it needs to run to get the app object.
 
-```
+```zsh
 gunicorn --bind 0.0.0.0:7999 'isiteaster:create_app()'
 ```
 
 ## Docker
 
-```
+```zsh
 docker build . -t isiteaster
 ```
 
@@ -150,6 +150,19 @@ The continuer uses the volume at `/data`.
 The application reads the configuration file located at `/data/isiteaster.conf`.
 The `IMAGE_DIR` parameter is set to `'/data/images'`. Images from the host system
 should be mounted to `/data/images`.
+
+
+# Packaging
+
+PDM can be used for building wheel a wheel and a non-DVCS source package.
+
+```zsh
+source .venv/bin/activate
+pip install pdm setuptools
+pdm build
+```
+
+Building with PDM will also compile `.po` translation files into `.mo` files.
 
 
 # Translations
