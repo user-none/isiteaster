@@ -1,0 +1,51 @@
+[build-system]
+# pybabel on macOS requires setuptools to be installed in order to work properly
+requires = ["pdm-backend", "setuptools", "Babel"]
+build-backend = "pdm.backend"
+
+[project]
+name = "isiteaster"
+version = "0.1.0"
+authors = [
+    { name = "John Schember", email = "john@nachtimwald.com" },
+]
+
+description = "Web application to tell you if it is Easter and if not, when it will be next"
+readme = "README.md"
+license = { text = "AGPL-3.0-only"}
+keywords = [ "easter", "web", "flask"  ]
+
+requires-python = ">=3.11"
+dependencies = [
+    "Flask >= 3",
+    "Werkzeug >= 3",
+    "Jinja2 >= 3",
+    "Flask-Caching >= 2",
+    "Flask-Babel >= 4",
+    "requests >= 2.31",
+]
+
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Web Environment",
+    "Framework :: Flask",
+    "License :: OSI Approved :: GNU Affero General Public License v3",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Topic :: Internet :: WWW/HTTP :: WSGI",
+    "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
+    "Topic :: Religion"
+]
+
+[project.urls]
+Homepage = "https://isiteaster.us"
+Repository = "https://github.com/user-none/isiteaster"
+Issues = "https://github.com/user-none/isiteaster/issues"
+
+[tool.pdm.build]
+source-includes = [ "**/*.po", "babel.cfg" ]
+excludes = [ "**/messages.pot", "**/.DS_Store", "**/.*.swp", "**/.gitignore" ]
+
+[tool.pdm.scripts]
+pre_build = "pybabel compile -d isiteaster/translations"
