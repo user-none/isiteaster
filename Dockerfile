@@ -24,9 +24,15 @@ RUN pip3 uninstall -y pip setuptools packaging
 
 FROM alpine:latest AS release
 EXPOSE 80
+VOLUME /data
 
 RUN apk add --no-cache python3
 COPY --from=build /opt/pyenv /opt/pyenv
 ENV PATH="/opt/pyenv/bin:$PATH"
+
+RUN mkdir -p /data/images
+COPY --from=build /build/isiteaster/config_default.py /data/isiteaster.conf
+RUN sed -i -e "s/IMAGE_DIR[ ]*=[ ]*None/IMAGE_DIR = '\/data\/images'/g" /data/isiteaster.conf
+ENV ISITEASTER_CONF="/data/isiteaster.conf"
 
 CMD ["gunicorn", "--bind", "0.0.0.0:80", "isiteaster:create_app()" ]

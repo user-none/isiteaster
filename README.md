@@ -143,6 +143,14 @@ gunicorn --bind 0.0.0.0:7999 'isiteaster:create_app()'
 docker build . -t isiteaster
 ```
 
+### Data
+
+The continuer uses the volume at `/data`.
+
+The application reads the configuration file located at `/data/isiteaster.conf`.
+The `IMAGE_DIR` parameter is set to `'/data/images'`. Images from the host system
+should be mounted to `/data/images`.
+
 
 # Translations
 
