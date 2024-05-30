@@ -35,4 +35,4 @@ COPY --from=build /build/isiteaster/config_default.py /data/isiteaster.conf
 RUN sed -i -e "s/IMAGE_DIR[ ]*=[ ]*None/IMAGE_DIR = '\/data\/images'/g" /data/isiteaster.conf
 ENV ISITEASTER_CONF="/data/isiteaster.conf"
 
-CMD ["gunicorn", "--bind", "0.0.0.0:80", "isiteaster:create_app()" ]
+CMD [ "gunicorn", "--bind", "0.0.0.0:80", "isiteaster:create_app()" ]
