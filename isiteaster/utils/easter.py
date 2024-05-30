@@ -13,7 +13,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 
 from .tz import get_tz
 
@@ -36,8 +36,8 @@ def easter_date(year: int) -> date:
 
 def when_is_easter(request, config) -> (bool, date):
     today = datetime.now().date()
-    today_m2 = date(today.year, today.month, today.day - 2)
-    today_p2 = date(today.year, today.month, today.day + 2)
+    today_m2 = today - timedelta(days=2)
+    today_p2 = today + timedelta(days=2)
     easter = easter_date(today.year)
 
     # Within 2 days we need to do some lookups to take into account timezone
