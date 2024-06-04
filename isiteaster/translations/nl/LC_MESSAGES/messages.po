@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-20 20:31-0400\n"
+"POT-Creation-Date: 2024-06-04 14:50-0400\n"
 "PO-Revision-Date: 2024-05-20 20:23-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl\n"
@@ -18,39 +18,39 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.15.0\n"
 
-#: templates/404.j2:7
+#: isiteaster/templates/404.j2:7
 msgid "The bunny has escaped!"
 msgstr "Het konijn is ontsnapt!"
 
-#: templates/404.j2:11
+#: isiteaster/templates/404.j2:11
 msgid "Chase after it"
 msgstr "Achtervolgen"
 
-#: templates/500.j2:7
+#: isiteaster/templates/500.j2:7
 msgid "The bunny is confused"
 msgstr "Het konijn is verward"
 
-#: templates/500.j2:11
+#: isiteaster/templates/500.j2:11
 msgid "Try again?"
 msgstr "Opnieuw proberen?"
 
-#: templates/index.j2:17
+#: isiteaster/templates/index.j2:17
 msgid "Today is Easter!"
 msgstr "Vandaag is het Pasen"
 
-#: templates/index.j2:34
+#: isiteaster/templates/index.j2:33
 msgid "Easter is on"
 msgstr "Pasen valt op"
 
-#: templates/index.j2:37
+#: isiteaster/templates/index.j2:36
 msgid "(It's a Sunday because Easter is always on a Sunday)"
 msgstr "(Het is een zondag omdat Pasen altijd op een zondag valt)"
 
-#: templates/partials/footer.j2:6
+#: isiteaster/templates/partials/footer.j2:6
 msgid "View on GitHub"
 msgstr "Bekijken op GitHub"
 
-#: templates/partials/head.j2:4
+#: isiteaster/templates/partials/head.j2:5
 msgid "Is It Easter?"
 msgstr "Is het Pasen?"
 
