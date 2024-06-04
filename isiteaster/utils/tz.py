@@ -13,7 +13,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import requests
+import httpx
 
 from datetime import datetime, timezone, timedelta
 from ipaddress import ip_address
@@ -36,8 +36,9 @@ def _get_ip_tz_delta(ip, apikey):
     try:
         j = None
         params = { 'ip': ip, 'apiKey': apikey }
-        r = requests.get('https://api.ipgeolocation.io/timezone', params=params)
-        j = r.json()
+        with httpx.Client(http2=True) as client:
+            r = client.get('https://api.ipgeolocation.io/timezone', params=params)
+            j = r.json()
 
         if not j:
             raise Exception('Empty JSON')

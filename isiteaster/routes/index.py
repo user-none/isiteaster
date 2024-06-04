@@ -17,7 +17,7 @@ from datetime import datetime
 
 from flask import Blueprint, render_template, request, current_app
 
-from ..utils.easter import easter_date, when_is_easter
+from ..utils.easter import when_is_easter
 
 bp = Blueprint('index', __name__)
 

@@ -22,7 +22,7 @@ dependencies = [
     "Jinja2 >= 3",
     "Flask-Caching >= 2",
     "Flask-Babel >= 4",
-    "requests >= 2.31",
+    "httpx[http2]"
 ]
 
 classifiers = [
