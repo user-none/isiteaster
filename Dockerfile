@@ -9,7 +9,7 @@ RUN apk add --no-cache python3 py3-pip
 # Create build env
 RUN python3 -m venv ./.venv
 ENV PATH="/build/.venv/bin:$PATH"
-RUN pip3 install --no-cache-dir pdm setuptools Babel
+RUN pip3 install pdm setuptools Babel
 
 # Build the whl distribution file
 RUN pdm build
@@ -17,8 +17,8 @@ RUN pdm build
 # Create the runtime env
 RUN python3 -m venv /opt/pyenv
 ENV PATH="/opt/pyenv/bin:$PATH"
-RUN pip3 install --no-cache-dir gunicorn
-RUN pip install ./dist/*.whl
+RUN pip3 install gunicorn
+RUN pip3 install ./dist/*.whl
 RUN pip3 uninstall -y pip setuptools packaging
 
 
