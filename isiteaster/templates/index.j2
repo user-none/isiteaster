@@ -5,7 +5,7 @@
     <div class="has-text-centered">
         {% if bunny_picture %}
             <figure class="image is-square">
-                <img src="{{ url_for('static', filename='images/bunny_happy.svg') }}" />
+                <img src="{{ url_for('static', filename='images/bunny_happy.svg') }}" alt="Happy Bunny" />
             </figure>
         {% else %}
             <span class="is-size-1">
@@ -20,8 +20,7 @@
     <div class="box has-text-centered">
         {% if bunny_picture %}
             <figure class="image is-square">
-                <img
-                    src="{{ url_for('static', filename='images/bunny_sad.svg') }}" />
+                <img src="{{ url_for('static', filename='images/bunny_sad.svg') }}" alt="Sad Bunny" />
             </figure>
         {% else %}
             <span class="is-size-1">
