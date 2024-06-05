@@ -31,8 +31,8 @@ COPY --from=build /opt/pyenv /opt/pyenv
 ENV PATH="/opt/pyenv/bin:$PATH"
 
 RUN mkdir -p /data/images
-COPY --from=build /build/isiteaster/config_default.py /data/isiteaster.conf
-RUN sed -i -e "s/IMAGE_DIR[ ]*=[ ]*None/IMAGE_DIR = '\/data\/images'/g" /data/isiteaster.conf
+RUN mkdir -p /data/cache
+COPY docker/isiteaster.conf /data/isiteaster.conf
 ENV ISITEASTER_CONF="/data/isiteaster.conf"
 
 CMD [ "gunicorn", "--bind", "0.0.0.0:80", "isiteaster:create_app()" ]
