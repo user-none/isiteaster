@@ -44,7 +44,7 @@ Repository = "https://github.com/user-none/isiteaster"
 Issues = "https://github.com/user-none/isiteaster/issues"
 
 [tool.pdm.build]
-source-includes = [ "**/*.po", "babel.cfg" ]
+source-includes = [ "**/*.po", "babel.cfg", "docker" ]
 excludes = [ "**/messages.pot", "**/.DS_Store", "**/.*.swp", "**/.gitignore" ]
 
 [tool.pdm.scripts]
