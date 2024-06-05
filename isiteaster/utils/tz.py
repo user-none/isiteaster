@@ -78,10 +78,13 @@ def get_tz(request, config):
         return None
 
     # Try pulling the tz offset for the ip from the cache
-    offset = cache.get(_ip_tz_offset_cache_key(ip))
-    if offset:
-        delta = timedelta(seconds=offset)
-        return timezone(delta)
+    try:
+        offset = cache.get(_ip_tz_offset_cache_key(ip))
+        if offset:
+            delta = timedelta(seconds=offset)
+            return timezone(delta)
+    except:
+        pass
 
     # Get timezone offset from geo IP service
     delta = _get_ip_tz_delta(ip, config.get('IPGEO_API_KEY'))
@@ -91,6 +94,9 @@ def get_tz(request, config):
         delta = datetime.now(timezone.utc).astimezone().utcoffset()
 
     # Cache offset
-    cache.set(_ip_tz_offset_cache_key(ip), delta.total_seconds())
+    try:
+        cache.set(_ip_tz_offset_cache_key(ip), delta.total_seconds())
+    except:
+        pass
 
     return timezone(delta)
