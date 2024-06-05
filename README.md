@@ -50,20 +50,24 @@ Memcached, or local file.
 
 # Images
 
-Images are not required to be provided. However, none are included
-but, if provided, will be used when detected. If images are not present, an
-alternative is used. Specially, if bunny pictures are not present, emoji
-are used. If a `favicon.ico` is not present, a blank `favicon.ico` will be used.
+Images are not required to be provided. However, none are included. If external
+images are provided, they be used. External images are auto detected in order
+for the application to know it should be used. If images are not present, an
+alternative is used. Specially, if bunny pictures are not present, emoji are
+used. If a `favicon.ico` is not present, a blank `favicon.ico` will be used.
 
-Images in the following locations will be used.
+## Image Files
 
-- `static/images/bunny_happy.svg`: Picture of a happy bunny used when it is Easter
-- `static/images/bunny_sad.svg`: Picture of a sad bunny used when it is _not_ Easter
-- `static/images/favicon.ico`: Favicon.
+- `bunny_happy.svg`: Picture of a happy bunny used when it is Easter
+- `bunny_sad.svg`: Picture of a sad bunny used when it is _not_ Easter
+- `favicon.ico`: Favicon.
 
-Alternately, the setting `IMAGE_DIR` can be specified to set a location for
-the above images. This allows the images to be stored outside of the application.
-Images at this location should be the files and not within `static/images` sub directory.
+## Image Location(s)
+
+The default image location is `isiteaster/static/images/`. Images can be placed
+in this directory or alternately, the configuration setting `IMAGE_DIR` can be
+specified to use a different location for the above images. This allows the
+images to be stored outside of the application.
 
 
 # Configuration
@@ -148,12 +152,28 @@ docker build . -t isiteaster -f docker/Dockerfile
 
 ### Data
 
-The continuer uses the volume at `/data`.
+The continuer uses the volume at `/data` for the base location of all files that
+can be externally managed. The data directory is split into sub directories for
+different functionality in order to allow different mount points to be used.
 
-The application reads the configuration file located at `/data/isiteaster.conf`.
-The `IMAGE_DIR` parameter is set to `/data/images`. Images from the host system
-should be mounted to `/data/images`. Additionally, file system caching is
-enabled for IP lookups and uses `/data/cache` as the cache location.
+- `/data/conf/`
+- `/data/images/`
+- `/data/cache/`
+
+#### /data/conf/
+
+The application configuration file is `/data/conf/isiteaster.conf`.
+
+#### /data/images/
+
+The `IMAGE_DIR` parameter within the configuration file is set to `/data/images`.
+Images as defined in the "Images" section should be mounted to this location.
+
+#### /data/cache/
+
+By default a file system cache is used to cache time zone offsets of IP address.
+If this is mounted the cache can be persisted outside of Docker. Instead
+of it managing cache data as part of a volume.
 
 
 # Packaging

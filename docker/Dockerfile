@@ -30,9 +30,10 @@ RUN apk add --no-cache python3
 COPY --from=build /opt/pyenv /opt/pyenv
 ENV PATH="/opt/pyenv/bin:$PATH"
 
+RUN mkdir -p /data/conf
 RUN mkdir -p /data/images
 RUN mkdir -p /data/cache
-COPY docker/isiteaster.conf /data/isiteaster.conf
-ENV ISITEASTER_CONF="/data/isiteaster.conf"
+COPY docker/isiteaster.conf /data/conf/isiteaster.conf
+ENV ISITEASTER_CONF="/data/conf/isiteaster.conf"
 
 CMD [ "gunicorn", "--bind", "0.0.0.0:80", "isiteaster:create_app()" ]
